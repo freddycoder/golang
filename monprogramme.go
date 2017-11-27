@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 type s_mesure struct {
 	pieds, pouces int
 }
@@ -39,13 +38,23 @@ func main() {
 			mesure2 = interchanger
 
 		case 6:
+			//fmt.Print("La première mesure en centimètres est : ", mesure1.pieds*12*2.54+mesure1.pouces*2.54)
 
+		case 7:
+			//fmt.Print("La première mesure en mètres est : ", (mesure1.pieds*12*2.54+mesure1.pouces*2.54)/100)
+
+		case 8:
+			fmt.Println(ajouterUnPouce(mesure1))
+		case 9:
+			fmt.Println(ajouterUnPied(mesure1))
+		default:
+			fmt.Println("Entrer un option valide.")
 		}
 	}
 }
 
 func imprimerMenu() {
-	fmt.Print("\n1. Entrer une donnée en pieds pouces.\n2.Entrer une seconde mesure en pieds pouces\n3.Afficher la première mesure\n4.Afficher la seconde mesure.\n5.Interchanger les mesures.\n6.Afficher la première mesure en centimètre(s).\n7.Afficher la seconde mesure en mètre(s).\n8.Ajouter un pouces à la première mesure.\n9.Ajouter un pied à la seconde mesure.\n0.Quitter.\n\nVotre choix >>> ")
+	fmt.Print("\n1.Entrer une donnée en pieds pouces.\n2.Entrer une seconde mesure en pieds pouces\n3.Afficher la première mesure\n4.Afficher la seconde mesure.\n5.Interchanger les mesures.\n6.Afficher la première mesure en centimètre(s).\n7.Afficher la seconde mesure en mètre(s).\n8.Ajouter un pouces à la première mesure.\n9.Ajouter un pied à la seconde mesure.\n0.Quitter.\n\nVotre choix >>> ")
 }
 
 func entrerMesure(texteAAfficher string) s_mesure {
@@ -56,4 +65,19 @@ func entrerMesure(texteAAfficher string) s_mesure {
 	mesureSaisie.pieds = donneeEntrerParUtil /12
 	mesureSaisie.pouces = donneeEntrerParUtil %12
 	return mesureSaisie
+}
+
+func ajouterUnPouce(mesure s_mesure) s_mesure {
+	if mesure.pouces == 11 {
+		mesure.pouces = 0
+		mesure.pieds = mesure.pieds + 1
+	} else {
+		mesure.pouces = mesure.pouces + 1
+	}
+	return mesure
+}
+
+func ajouterUnPied(mesure s_mesure) s_mesure {
+	mesure.pieds = mesure.pieds + 1
+	return mesure
 }
